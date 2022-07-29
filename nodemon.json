@@ -1,0 +1,5 @@
+{
+    "ignore": [
+        "otp-session.json"
+    ]
+}
