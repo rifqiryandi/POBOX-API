@@ -3,3 +3,8 @@
 
 # Note :
 You have to use your local db Postgresql 14
+
+# Noter Version :
+-Postgresql 14
+-Node js v16.14.0
+-npm v8.7.0
