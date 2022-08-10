@@ -11,7 +11,7 @@ function getAllProduk(req, res) {
     } catch (error) {
         res.status(400).json({
             'responCode': 400,
-            'Msg': error.message
+            'Msg': 'Error Controller :' + error.message
         })
     }
 }

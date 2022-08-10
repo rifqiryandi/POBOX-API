@@ -1,8 +1,28 @@
 let db = require('../config/db')
 
-const getInvoice = async(res) => {
+const getInvoice = async(res, id, id_pemesanan) => {
     try {
-        let data = db.knex.raw('SELECT i.id,pe.id,l.nama,pe.kustomisasi_nama,pro.harga,ad.harga,pe.totalharga FROM invoice i JOIN verifikasi v ON i.verifikasi_id = v.id JOIN admin a ON a.id = v.admin_id JOIN pembayaran p ON p.id = v.pembayaran_id JOIN pemesanan pe ON pe.id = p.pemesanan_id JOIN customer c ON c.id = pe.customer_id JOIN lokasi l ON l.id = pe.lokasi_id JOIN produkfinal pr ON pr.produk_id = pe.produk_id JOIN produk pro ON pro.id = pr.produk_id JOIN add_on ad ON ad.id = pr.add_on_id ')
+        let params = {
+            id: id,
+            id_pemesanan: id_pemesanan
+        }
+        let data = db.knex.raw('SELECT DISTINCT pe.*,l.nama_kantor, v.status, p.tanggal_pembayaran FROM invoice i JOIN verifikasi v ON v.id = i.verifikasi_id JOIN pembayaran p ON p.id = v.pembayaran_id JOIN admin a ON a.id = v.admin_id JOIN pemesanan pe ON pe.id = p.pemesanan_id JOIN lokasi l ON l.id = pe.lokasi_id JOIN customer c ON c.id = pe.customer_id JOIN produk pr ON pr.id = pe.produk_id JOIN produkfinal pf ON pr.id = pf.produk_id JOIN add_on ad ON ad.id = pf.add_on_id WHERE c.id = :id AND pe.id = :id_pemesanan ', params)
+        return await data
+    } catch (error) {
+        return res.status(400).json({
+            'responCode': 400,
+            'Msg': 'Error Model : ' + error.message
+        })
+    }
+}
+
+const getProdukAndAddon = async(res, id, id_pemesanan) => {
+    try {
+        let params = {
+            id: id,
+            id_pemesanan: id_pemesanan
+        }
+        let data = db.knex.raw('SELECT DISTINCT pr.produk,pr.harga as harga_produk , ad.nama,ad.harga as harga_addon FROM invoice i JOIN verifikasi v ON v.id = i.verifikasi_id JOIN pembayaran p ON p.id = v.pembayaran_id JOIN admin a ON a.id = v.admin_id JOIN pemesanan pe ON pe.id = p.pemesanan_id JOIN lokasi l ON l.id = pe.lokasi_id JOIN customer c ON c.id = pe.customer_id JOIN produk pr ON pr.id = pe.produk_id JOIN produkfinal pf ON pr.id = pf.produk_id JOIN add_on ad ON ad.id = pf.add_on_id WHERE c.id = :id AND pe.id = :id_pemesanan ', params)
         return await data
     } catch (error) {
         return res.status(400).json({
@@ -32,4 +52,9 @@ const inputInvoice = async(verifikasi_id) => {
     return await data
 }
 
-module.exports = { getInvoice, inputInvoice, getAllInvoice }
+module.exports = {
+    getInvoice,
+    inputInvoice,
+    getAllInvoice,
+    getProdukAndAddon
+}

@@ -19,16 +19,38 @@ let c_produkfinal = require('./controller/produkfinal.controller')
 let c_pemesanan = require('./controller/pemesanan.controller')
 let c_pembayaran = require('./controller/pembayaran.controller')
 let c_verifikasi = require('./controller/verifikasi.controller')
-
+let c_invoice = require('./controller/invoice.controller')
 
 //!controller and middleware
+// ? WA
 const qrcode = require('qrcode-terminal');
 const { Client, LocalAuth } = require('whatsapp-web.js');
 
+// ? WA
+
+// ? UTIL
+const u_date = require('./utils/date.util')
+
 const fs = require('fs');
 let path = require('path');
-
+const multer = require('multer');
 const SESSION_FILE_PATH = './otp-session.json';
+const fileStorageKtp = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'public/')
+    },
+    filename: (req, file, cb) => {
+        cb(null, u_date.dateNowCustom() + '-' + file.originalname)
+    }
+})
+
+const fileFilter = (req, file, cb) => {
+    if (file.mimetype === 'image/png' || file.mimetype === 'image/jpg' || file.mimetype === 'image/jpeg') {
+        cb(null, true);
+    } else {
+        cb(null, false);
+    }
+}
 
 const client = new Client({
     puppeteer: { headless: true },
@@ -37,11 +59,12 @@ const client = new Client({
     })
 });
 
-
 app.use([
     bodyParser.urlencoded({ extended: true }),
     bodyParser.json()
 ])
+app.use('/public', express.static(path.join(__dirname, 'public')))
+app.use(multer({ storage: fileStorageKtp, fileFilter: fileFilter }).single('image'))
 
 // ? OTP
 app.get('/OTPcheck', (req, res) => { c_user.OTPcheck(req, res) })
@@ -108,6 +131,7 @@ app.group("/api_pobox/", (router) => {
     //*user
     router.get('/getAllUser', (req, res) => { c_user.getAllUser(req, res) })
     router.put('/updateUser', (req, res) => { c_user.updateUser(req, res) })
+    router.put('/updateKTP', (req, res) => { c_user.updateKTP(req, res) })
 
     // * Lokasi
     router.get('/getAllLokasi', (req, res) => { c_lokasi.getAllLokasi(req, res) })
@@ -136,11 +160,16 @@ app.group("/api_pobox/", (router) => {
 
     // * Pemesanan
     router.post('/inputPemesanan', (req, res) => { c_pemesanan.inputPemesanan(req, res) })
+    router.get('/getPemesananByCustomer', (req, res) => { c_pemesanan.getPemesananByCustomer(req, res) })
 
     // * Pemesanan
 
     // * Pembayaran
     router.get('/getAllPembayaran', (req, res) => { c_pembayaran.getAllPembayaran(req, res) })
+    router.get('/getPembayaranById', (req, res) => { c_pembayaran.getPembayaranById(req, res) })
+
+    // ? POST AND PUT PEMBAYARAN 
+    router.post('/inputPembayaran', (req, res) => { c_pembayaran.inputPembayaran(req, res) })
 
     // * Pembayaran
 
@@ -148,6 +177,13 @@ app.group("/api_pobox/", (router) => {
     router.get('/getVerifikasiById', (req, res) => { c_verifikasi.getVerifikasiById(req, res) })
 
     // * Verifikasi
+
+    // * Invoice
+    router.get('/getInvoice', (req, res) => { c_invoice.getInvoice(req, res) })
+    router.get('/getProdukAndAddon', (req, res) => { c_invoice.getProdukAndAddon(req, res) })
+
+    // * Invoice
+
 
 
 });
@@ -165,8 +201,10 @@ app.put('/updateAddon', (req, res) => { c_addon.updateAddon(req, res) })
 app.post('/inputVerifikasi', (req, res) => { c_verifikasi.inputVerifikasi(req, res) })
 app.put('/updateVerifikasi', (req, res) => { c_verifikasi.updateVerifikasi(req, res) })
 
-// ? POST AND PUT PEMBAYARAN 
-app.post('/inputPembayaran', (req, res) => { c_pembayaran.inputPembayaran(req, res) })
+
+
+// ? POST AND PUT INVOICE 
+app.post('/inputInvoice', (req, res) => { c_invoice.inputInvoice(req, res) })
 
 ////////////////////////////////////
 
@@ -178,35 +216,35 @@ app.put('/userDelete', (req, res) => { c_user.deleteUser(req, res) })
 
 //Port Listen
 app.listen(port, () => {
-    client.on('qr', qr => {
-        qrcode.generate(qr, { small: true });
-    });
+    // client.on('qr', qr => {
+    //     qrcode.generate(qr, { small: true });
+    // });
 
-    client.on('authenticated', (session) => {
-        console.log('WHATSAPP WEB => Authenticated');
-    });
+    // client.on('authenticated', (session) => {
+    //     console.log('WHATSAPP WEB => Authenticated');
+    // });
 
-    client.on('ready', () => {
-        console.log('Client is ready!!');
-    });
-    client.on('message', message => {
-        // CUSTOM NUMBER
-        let arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-        let shuff = arr.sort(() => Math.random() - 0.5)
-        let val = shuff.splice(1, 6);
-        let str = val.toString();
-        let otp = str.replace(/[^\w\s]/gi, '')
+    // client.on('ready', () => {
+    //     console.log('Client is ready!!');
+    // });
+    // client.on('message', message => {
+    //     // CUSTOM NUMBER
+    //     let arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    //     let shuff = arr.sort(() => Math.random() - 0.5)
+    //     let val = shuff.splice(1, 6);
+    //     let str = val.toString();
+    //     let otp = str.replace(/[^\w\s]/gi, '')
 
-        // session
-        fs.writeFile(SESSION_FILE_PATH, JSON.stringify(otp), (err) => {
-            if (err) {
-                console.error(err);
-            }
-        });
-        if (message.body === 'Req OTP POBOX') {
-            message.reply('POBOX OTP :' + otp);
-        }
-    });
-    client.initialize();
+    //     // session
+    //     fs.writeFile(SESSION_FILE_PATH, JSON.stringify(otp), (err) => {
+    //         if (err) {
+    //             console.error(err);
+    //         }
+    //     });
+    //     if (message.body === 'Req OTP POBOX') {
+    //         message.reply('POBOX OTP :' + otp);
+    //     }
+    // });
+    // client.initialize();
     console.log(`Server berjalan pada http://${host}:${port}`)
 })

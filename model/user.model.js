@@ -49,4 +49,15 @@ const updateUser = async(id, nama, no_hp, email, pin) => {
     return await data
 }
 
-module.exports = { getUser, getAllUser, inputUser, updateUser }
+const updateKTP = async(id, foto_ktp) => {
+    let params = { foto_ktp }
+    let data = db.knex('customer').where({ id: id }).update(params)
+    return await data
+}
+module.exports = {
+    getUser,
+    getAllUser,
+    inputUser,
+    updateUser,
+    updateKTP
+}
