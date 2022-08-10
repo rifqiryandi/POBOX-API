@@ -150,11 +150,32 @@ function updateUser(req, res) {
     }
 }
 
+function updateKTP(req, res) {
+    try {
+        if (!req.file) {
+            return res.status(400).json({
+                'responCode': 400,
+                'Msg': 'Error Image: Harus Di Upload'
+            })
+        }
+        let id = req.body.id
+        let foto_ktp = req.file.path
+        let data = m_user.updateKTP(id, foto_ktp)
+        u_respon.responCheck(data, res, 2)
+    } catch (error) {
+        return res.status(400).json({
+            'responCode': 400,
+            'Msg': 'Error Controller:' + error.message
+        })
+    }
+}
+
 module.exports = {
     getUser,
     getAllUser,
     inputUser,
     checkUser,
     OTPcheck,
-    updateUser
+    updateUser,
+    updateKTP
 }

@@ -46,8 +46,10 @@ function inputPemesanan(req, res) {
             })
         } else {
             total_harga = parseInt(harga_produk) * parseInt(durasi_sewa)
-            let data = m_pemesanan.inputPemesanan(customer_id, tanggal_pemesanan, alamat_pemesanan, durasi_sewa, satuan_durasi_sewa, lokasi_id, produk_id, kustomisasi_nama, total_harga)
-            u_respon.responCheck(data, res, 2)
+            m_produkfinal.inputProdukFinal(produk_id, 1, harga_produk).then((result) => {
+                let data = m_pemesanan.inputPemesanan(customer_id, tanggal_pemesanan, alamat_pemesanan, durasi_sewa, satuan_durasi_sewa, lokasi_id, produk_id, kustomisasi_nama, total_harga)
+                u_respon.responCheck(data, res, 2)
+            })
         }
 
     } catch (error) {
@@ -58,4 +60,20 @@ function inputPemesanan(req, res) {
     }
 }
 
-module.exports = { inputPemesanan }
+function getPemesananByCustomer(req, res) {
+    try {
+        let customer_id = req.body.customer_id
+        let data = m_pemesanan.getPemesananByCustomer(res, customer_id)
+        u_respon.responCheck(data, res)
+    } catch (error) {
+        res.status(400).json({
+            'responCode': 400,
+            'Msg': 'Controller Error :' + error.message
+        })
+    }
+}
+
+module.exports = {
+    inputPemesanan,
+    getPemesananByCustomer
+}

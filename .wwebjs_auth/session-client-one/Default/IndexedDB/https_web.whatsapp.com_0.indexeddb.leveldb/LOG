@@ -1,0 +1,12 @@
+2022/08/02-13:42:04.593 367c Creating DB D:\PT.Pos Indonesia\POBOX\pobox-api\.wwebjs_auth\session-client-one\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb since it was missing.
+2022/08/02-13:42:04.921 367c Reusing MANIFEST D:\PT.Pos Indonesia\POBOX\pobox-api\.wwebjs_auth\session-client-one\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2022/08/02-13:45:10.243 4f30 Level-0 table #5: started
+2022/08/02-13:45:10.728 4f30 Level-0 table #5: 1173672 bytes OK
+2022/08/02-13:45:10.782 4f30 Delete type=0 #3
+2022/08/02-13:45:22.690 540c Level-0 table #7: started
+2022/08/02-13:45:22.900 540c Level-0 table #7: 1018872 bytes OK
+2022/08/02-13:45:22.940 540c Delete type=0 #4
+2022/08/02-13:45:23.049 540c Compacting 1@1 + 1@2 files
+2022/08/02-13:45:23.241 540c Generated table #8@1: 18922 keys, 1220081 bytes
+2022/08/02-13:45:23.241 540c Compacted 1@1 + 1@2 files => 1220081 bytes
+2022/08/02-13:45:23.337 540c compacted to: files[ 0 0 1 0 0 0 0 ]

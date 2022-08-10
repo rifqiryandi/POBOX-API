@@ -10,11 +10,10 @@ function responCheck(data, res, spesifik = 0) {
                             'Msg': "Fail"
                         })
                     } else if (reqData.length == 0) {
-                        code(404, reqData, res, 1)
+                        code(400, reqData, res, 1)
 
                     } else {
-                        code(201, reqData, res, 1)
-
+                        code(200, reqData, res, 1)
                     }
                 })
             } catch (error) {
@@ -79,22 +78,7 @@ const code = (responCode, data, res, spesifikRespon = 0) => {
                     return res.status(200).json({
                         'responCode': 200,
                         'Msg': "Berhasil",
-                        'ResponFromDB': data[0][0]
-                    })
-                    break;
-                case 201:
-                    return res.status(200).json({
-                        'responCode': 200,
-                        'Msg': "Berhasil",
-                        'Data': data[0][0]
-                    })
-                    break;
-
-                case 202:
-                    return res.status(202).json({
-                        'responCode': 202,
-                        'Msg': "Accepted",
-                        'ResponFromDB': data[0][0]
+                        'Data': data['rows']
                     })
                     break;
 
@@ -102,7 +86,7 @@ const code = (responCode, data, res, spesifikRespon = 0) => {
                     return res.status(404).json({
                         'responCode': 404,
                         'Msg': "Fail",
-                        'ResponFromDB': data[0][0]
+                        'Data': data
                     })
                     break;
             }

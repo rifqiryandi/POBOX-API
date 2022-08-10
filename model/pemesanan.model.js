@@ -16,6 +16,19 @@ const inputPemesanan = async(customer_id, tanggal_pemesanan, alamat_pemesanan, d
     return await data
 }
 
+const getPemesananByCustomer = async(res, customer_id) => {
+    try {
+        let params = { customer_id: customer_id }
+        let data = db.knex('pemesanan').where(params)
+        return await data
+    } catch (error) {
+        return res.status(400).json({
+            'responCode': 400,
+            'Msg': 'Error Model : ' + error.message
+        })
+    }
+}
+
 // const transPemesanan = async() => {
 //     let paramsProdukFinal = {
 //         produk_id: produk_id,
@@ -26,4 +39,7 @@ const inputPemesanan = async(customer_id, tanggal_pemesanan, alamat_pemesanan, d
 //     trx('produkfinal').insert(paramsProdukFinal)
 // }
 
-module.exports = { inputPemesanan }
+module.exports = {
+    inputPemesanan,
+    getPemesananByCustomer
+}

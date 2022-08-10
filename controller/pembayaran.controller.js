@@ -7,12 +7,17 @@ let m_pembayaran = require('../model/pembayaran.model')
 
 function inputPembayaran(req, res) {
     try {
+        if (!req.file) {
+            return res.status(400).json({
+                'responCode': 400,
+                'Msg': 'Error Image: Harus Di Upload'
+            })
+        }
         let tanggal_pembayaran = u_date.dateNow()
         let {
-            pemesanan_id,
-            foto_bukti
+            pemesanan_id
         } = req.body
-
+        let foto_bukti = req.file.path
         let data = m_pembayaran.inputPembayaran(pemesanan_id, tanggal_pembayaran, foto_bukti)
         u_respon.responCheck(data, res, 2)
     } catch (error) {
