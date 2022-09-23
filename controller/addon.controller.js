@@ -18,7 +18,7 @@ function getAllAddon(req, res) {
 
 function getAddon(req, res) {
     try {
-        let id = req.body.id
+        let id = req.headers.id
         let data = m_addon.getAddon(res, id)
         u_respon.responCheck(data, res)
     } catch (error) {

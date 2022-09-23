@@ -39,20 +39,14 @@ const getNewProdukFinal = async(res) => {
 }
 
 const inputProdukFinal = async(produk_id, add_on_id, total) => {
-    try {
-        let params = {
-            produk_id: produk_id,
-            add_on_id: add_on_id,
-            total: total
-        }
-        let data = db.knex('produkfinal').insert(params)
-        return await data
-    } catch (error) {
-        return res.status(400).json({
-            'responCode': 400,
-            'Msg': 'Error Model : ' + error.message
-        })
+    let params = {
+        produk_id: produk_id,
+        add_on_id: add_on_id,
+        total: total
     }
+    let data = db.knex('produkfinal').insert(params)
+    return await data
+
 }
 
 module.exports = { getAllProdukFinal, getProdukFinal, inputProdukFinal, getNewProdukFinal }

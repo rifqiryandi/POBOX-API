@@ -25,6 +25,19 @@ const getVerifikasiById = async(res, id) => {
     }
 }
 
+const getVerifikasiByPemesanan = async(res, id) => {
+    try {
+        let params = { id_pemesanan: id }
+        let data = db.knex.raw('select * from verifikasi v join pembayaran p on v.pembayaran_id  = p.id join pemesanan p2 on p2.id = p.pemesanan_id where p2.id = :id_pemesanan ', params)
+        return await data
+    } catch (error) {
+        return res.status(400).json({
+            'responCode': 400,
+            'Msg': 'Error Model : ' + error.message
+        })
+    }
+}
+
 const updateVerifikasi = async(id, status) => {
 
     let data = db.knex('verifikasi').where({ id: id }).update({ status: status })
@@ -32,4 +45,9 @@ const updateVerifikasi = async(id, status) => {
 
 }
 
-module.exports = { inputVerifikasi, getVerifikasiById, updateVerifikasi }
+module.exports = {
+    inputVerifikasi,
+    getVerifikasiById,
+    updateVerifikasi,
+    getVerifikasiByPemesanan
+}

@@ -62,7 +62,7 @@ function inputPemesanan(req, res) {
 
 function getPemesananByCustomer(req, res) {
     try {
-        let customer_id = req.body.customer_id
+        let customer_id = req.params['customer_id']
         let data = m_pemesanan.getPemesananByCustomer(res, customer_id)
         u_respon.responCheck(data, res)
     } catch (error) {
@@ -73,7 +73,36 @@ function getPemesananByCustomer(req, res) {
     }
 }
 
+function getAllPemesanan(req, res) {
+    try {
+        let data = m_pemesanan.getAllPemesanan(res)
+        u_respon.responCheck(data, res, 1)
+    } catch (error) {
+        res.status(400).json({
+            'responCode': 400,
+            'Msg': 'Controller Error :' + error.message
+        })
+    }
+}
+
+function putPemesananBox(req, res) {
+    try {
+        let id = req.body.id
+        let numBox = req.body.numBox
+
+        let data = m_pemesanan.putPemesananBox(id, numBox)
+        u_respon.responCheck(data, res, 2)
+    } catch (error) {
+        res.status(400).json({
+            'responCode': 400,
+            'Msg': 'Controller Error :' + error.message
+        })
+    }
+}
+
 module.exports = {
     inputPemesanan,
-    getPemesananByCustomer
+    getPemesananByCustomer,
+    getAllPemesanan,
+    putPemesananBox
 }

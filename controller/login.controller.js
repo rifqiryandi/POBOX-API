@@ -116,9 +116,7 @@ function login(req, res) {
                     const user = {
                         no_hp: result[0].no_hp
                     }
-                    const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
-                        expiresIn: '120m'
-                    })
+                    const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET)
                     res.status(200).json({
                         'responCode': 200,
                         'Msg': "Berhasil",

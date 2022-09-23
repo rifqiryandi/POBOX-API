@@ -35,4 +35,25 @@ const getPembayaranById = async(res, id) => {
     }
 }
 
-module.exports = { inputPembayaran, getAllPembayaran, getPembayaranById }
+const getPembayaranByPemesanan = async(res, id) => {
+    try {
+        let params = {
+            id_pemesanan: id
+        }
+        let data = db.knex.raw('select p.foto_bukti, p.id  from pembayaran p join pemesanan p2 on p.pemesanan_id  = p2.id where p.pemesanan_id = :id_pemesanan ', params)
+        return await data
+
+    } catch (error) {
+        return res.status(400).json({
+            'responCode': 400,
+            'Msg': 'Error Model : ' + error.message
+        })
+    }
+}
+
+module.exports = {
+    inputPembayaran,
+    getAllPembayaran,
+    getPembayaranById,
+    getPembayaranByPemesanan
+}
