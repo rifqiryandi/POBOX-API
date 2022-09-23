@@ -19,9 +19,8 @@ function inputInvoice(req, res) {
 
 function getInvoice(req, res) {
     try {
-        let id = req.body.id
-        let id_pemesanan = req.body.id_pemesanan
-
+        let id = req.headers.id
+        let id_pemesanan = req.headers.idpemesanan
         let data = m_invoice.getInvoice(res, id, id_pemesanan)
         u_respon.responCheck(data, res, 1)
     } catch (error) {
@@ -34,8 +33,8 @@ function getInvoice(req, res) {
 
 function getProdukAndAddon(req, res) {
     try {
-        let id = req.body.id
-        let id_pemesanan = req.body.id_pemesanan
+        let id = req.headers.id
+        let id_pemesanan = req.headers.idpemesanan
 
         let data = m_invoice.getProdukAndAddon(res, id, id_pemesanan)
         u_respon.responCheck(data, res, 1)

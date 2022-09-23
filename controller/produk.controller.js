@@ -16,9 +16,44 @@ function getAllProduk(req, res) {
     }
 }
 
-function getProduk(req, res) {
+function checkProduk(req, res) {
     try {
         let id = req.body.id
+        let data = m_produk.getProduk(res, id)
+        data.then((result) => {
+            let jenisProduk = result[0].produk
+            let arrProduk = jenisProduk.split(' ')
+
+            if (arrProduk[0] == 'Enterprise') {
+                res.status(200).json({
+                    'responCode': 200,
+                    'Msg': 'Jenis Produk :' + arrProduk[0],
+                    'Data': { 'status': false }
+                })
+            } else {
+                res.status(200).json({
+                    'responCode': 200,
+                    'Msg': 'Jenis Produk :' + arrProduk[0],
+                    'Data': { 'status': true }
+                })
+            }
+        }).catch((err) => {
+            res.status(400).json({
+                'responCode': 400,
+                'Msg': error.message
+            })
+        });
+    } catch (error) {
+        res.status(400).json({
+            'responCode': 400,
+            'Msg': error.message
+        })
+    }
+}
+
+function getProduk(req, res) {
+    try {
+        let id = req.headers.id
         let data = m_produk.getProduk(res, id)
         u_respon.responCheck(data, res)
     } catch (error) {
@@ -60,4 +95,4 @@ function updateProduk(req, res) {
     }
 }
 
-module.exports = { getAllProduk, getProduk, inputProduk, updateProduk }
+module.exports = { getAllProduk, getProduk, inputProduk, updateProduk, checkProduk }

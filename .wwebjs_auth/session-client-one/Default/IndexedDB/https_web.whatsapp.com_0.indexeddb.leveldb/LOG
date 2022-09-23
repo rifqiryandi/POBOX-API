@@ -1,12 +1,83 @@
-2022/08/02-13:42:04.593 367c Creating DB D:\PT.Pos Indonesia\POBOX\pobox-api\.wwebjs_auth\session-client-one\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb since it was missing.
-2022/08/02-13:42:04.921 367c Reusing MANIFEST D:\PT.Pos Indonesia\POBOX\pobox-api\.wwebjs_auth\session-client-one\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
-2022/08/02-13:45:10.243 4f30 Level-0 table #5: started
-2022/08/02-13:45:10.728 4f30 Level-0 table #5: 1173672 bytes OK
-2022/08/02-13:45:10.782 4f30 Delete type=0 #3
-2022/08/02-13:45:22.690 540c Level-0 table #7: started
-2022/08/02-13:45:22.900 540c Level-0 table #7: 1018872 bytes OK
-2022/08/02-13:45:22.940 540c Delete type=0 #4
-2022/08/02-13:45:23.049 540c Compacting 1@1 + 1@2 files
-2022/08/02-13:45:23.241 540c Generated table #8@1: 18922 keys, 1220081 bytes
-2022/08/02-13:45:23.241 540c Compacted 1@1 + 1@2 files => 1220081 bytes
-2022/08/02-13:45:23.337 540c compacted to: files[ 0 0 1 0 0 0 0 ]
+2022/09/23-10:39:13.537 5334 Reusing MANIFEST D:\PT.Pos Indonesia\POBOX\pobox-api\.wwebjs_auth\session-client-one\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-003097
+2022/09/23-10:39:13.539 5334 Recovering log #3275
+2022/09/23-10:39:13.752 5334 Reusing old log D:\PT.Pos Indonesia\POBOX\pobox-api\.wwebjs_auth\session-client-one\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/003275.log 
+2022/09/23-10:39:13.752 5334 Delete type=2 #3256
+2022/09/23-10:39:13.752 5334 Delete type=2 #3257
+2022/09/23-10:39:13.752 5334 Delete type=2 #3258
+2022/09/23-10:39:13.753 5334 Delete type=2 #3259
+2022/09/23-10:39:13.753 5334 Delete type=2 #3260
+2022/09/23-10:39:13.753 5334 Delete type=2 #3261
+2022/09/23-10:39:13.753 5334 Delete type=2 #3262
+2022/09/23-10:39:13.753 5334 Delete type=2 #3263
+2022/09/23-10:39:13.753 5334 Delete type=2 #3277
+2022/09/23-10:39:29.051 5334 Level-0 table #3300: started
+2022/09/23-10:39:29.253 5334 Level-0 table #3300: 1024522 bytes OK
+2022/09/23-10:39:29.291 5334 Delete type=0 #3275
+2022/09/23-10:39:29.605 5334 Compacting 1@0 + 0@1 files
+2022/09/23-10:39:29.734 5334 Generated table #3301@0: 14652 keys, 338666 bytes
+2022/09/23-10:39:29.857 5334 Generated table #3302@0: 2889 keys, 94220 bytes
+2022/09/23-10:39:29.857 5334 Compacted 1@0 + 0@1 files => 432886 bytes
+2022/09/23-10:39:29.899 5334 compacted to: files[ 0 3 45 0 0 0 0 ]
+2022/09/23-10:39:29.909 5334 Compacting 1@1 + 9@2 files
+2022/09/23-10:39:30.287 5334 Generated table #3303@1: 14926 keys, 3726959 bytes
+2022/09/23-10:39:30.596 5334 Generated table #3304@1: 17986 keys, 2170502 bytes
+2022/09/23-10:39:30.838 5334 Generated table #3305@1: 2200 keys, 2140883 bytes
+2022/09/23-10:39:31.152 5334 Generated table #3306@1: 2359 keys, 2144847 bytes
+2022/09/23-10:39:31.554 5334 Generated table #3307@1: 2435 keys, 2151840 bytes
+2022/09/23-10:39:31.762 5334 Generated table #3308@1: 1917 keys, 2142482 bytes
+2022/09/23-10:39:32.209 5334 Generated table #3309@1: 18829 keys, 2198180 bytes
+2022/09/23-10:39:32.473 5334 Generated table #3310@1: 26799 keys, 2278216 bytes
+2022/09/23-10:39:32.632 5334 Generated table #3311@1: 17060 keys, 1435193 bytes
+2022/09/23-10:39:32.632 5334 Compacted 1@1 + 9@2 files => 20389102 bytes
+2022/09/23-10:39:32.682 5334 compacted to: files[ 0 2 45 0 0 0 0 ]
+2022/09/23-10:39:32.683 5334 Delete type=2 #3302
+2022/09/23-10:39:33.166 1840 Compacting 1@1 + 8@2 files
+2022/09/23-10:39:33.451 1840 Generated table #3312@1: 33992 keys, 2273506 bytes
+2022/09/23-10:39:33.712 1840 Generated table #3313@1: 27241 keys, 2287246 bytes
+2022/09/23-10:39:33.961 1840 Generated table #3314@1: 25966 keys, 2289763 bytes
+2022/09/23-10:39:34.186 1840 Generated table #3315@1: 24908 keys, 2294393 bytes
+2022/09/23-10:39:34.473 1840 Generated table #3316@1: 24623 keys, 2292234 bytes
+2022/09/23-10:39:34.732 1840 Generated table #3317@1: 36007 keys, 2283833 bytes
+2022/09/23-10:39:34.957 1840 Generated table #3318@1: 29071 keys, 2282455 bytes
+2022/09/23-10:39:35.157 1840 Generated table #3319@1: 25171 keys, 2290644 bytes
+2022/09/23-10:39:35.218 1840 Generated table #3320@1: 2957 keys, 163001 bytes
+2022/09/23-10:39:35.218 1840 Compacted 1@1 + 8@2 files => 18457075 bytes
+2022/09/23-10:39:35.277 1840 compacted to: files[ 0 1 46 0 0 0 0 ]
+2022/09/23-10:39:35.279 1840 Delete type=2 #3280
+2022/09/23-10:39:35.279 1840 Delete type=2 #3281
+2022/09/23-10:39:35.279 1840 Delete type=2 #3282
+2022/09/23-10:39:35.279 1840 Delete type=2 #3283
+2022/09/23-10:39:35.279 1840 Delete type=2 #3284
+2022/09/23-10:39:35.279 1840 Delete type=2 #3285
+2022/09/23-10:39:35.279 1840 Delete type=2 #3286
+2022/09/23-10:39:35.279 1840 Delete type=2 #3287
+2022/09/23-10:39:35.279 1840 Delete type=2 #3288
+2022/09/23-10:39:35.279 1840 Delete type=2 #3300
+2022/09/23-10:44:30.345 386c Compacting 1@1 + 6@2 files
+2022/09/23-10:44:30.729 386c Generated table #3321@1: 93448 keys, 2240468 bytes
+2022/09/23-10:44:31.119 386c Generated table #3322@1: 102150 keys, 2254489 bytes
+2022/09/23-10:44:31.466 386c Generated table #3323@1: 102414 keys, 2254953 bytes
+2022/09/23-10:44:31.821 386c Generated table #3324@1: 102247 keys, 2254470 bytes
+2022/09/23-10:44:32.160 386c Generated table #3325@1: 103567 keys, 2253522 bytes
+2022/09/23-10:44:32.406 386c Generated table #3326@1: 83043 keys, 1836944 bytes
+2022/09/23-10:44:32.406 386c Compacted 1@1 + 6@2 files => 13094846 bytes
+2022/09/23-10:44:32.451 386c compacted to: files[ 0 0 46 0 0 0 0 ]
+2022/09/23-10:44:32.452 386c Delete type=2 #3237
+2022/09/23-10:44:32.452 386c Delete type=2 #3238
+2022/09/23-10:44:32.452 386c Delete type=2 #3239
+2022/09/23-10:44:32.452 386c Delete type=2 #3240
+2022/09/23-10:44:32.452 386c Delete type=2 #3241
+2022/09/23-10:44:32.452 386c Delete type=2 #3242
+2022/09/23-10:44:32.452 386c Delete type=2 #3279
+2022/09/23-10:44:32.452 386c Delete type=2 #3289
+2022/09/23-10:44:32.452 386c Delete type=2 #3290
+2022/09/23-10:44:32.452 386c Delete type=2 #3291
+2022/09/23-10:44:32.452 386c Delete type=2 #3292
+2022/09/23-10:44:32.452 386c Delete type=2 #3293
+2022/09/23-10:44:32.452 386c Delete type=2 #3294
+2022/09/23-10:44:32.452 386c Delete type=2 #3295
+2022/09/23-10:44:32.452 386c Delete type=2 #3296
+2022/09/23-10:44:32.452 386c Delete type=2 #3301
+2022/09/23-10:51:59.532 5334 Level-0 table #3328: started
+2022/09/23-10:51:59.709 5334 Level-0 table #3328: 1021335 bytes OK
+2022/09/23-10:51:59.754 5334 Delete type=0 #3299

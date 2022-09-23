@@ -1,12 +1,12 @@
 let db = require('../config/db')
 
-const getInvoice = async(res, id, id_pemesanan) => {
+const getInvoice = async(res, id, idPemesanan) => {
     try {
         let params = {
             id: id,
-            id_pemesanan: id_pemesanan
+            idPemesanan: idPemesanan
         }
-        let data = db.knex.raw('SELECT DISTINCT pe.*,l.nama_kantor, v.status, p.tanggal_pembayaran FROM invoice i JOIN verifikasi v ON v.id = i.verifikasi_id JOIN pembayaran p ON p.id = v.pembayaran_id JOIN admin a ON a.id = v.admin_id JOIN pemesanan pe ON pe.id = p.pemesanan_id JOIN lokasi l ON l.id = pe.lokasi_id JOIN customer c ON c.id = pe.customer_id JOIN produk pr ON pr.id = pe.produk_id JOIN produkfinal pf ON pr.id = pf.produk_id JOIN add_on ad ON ad.id = pf.add_on_id WHERE c.id = :id AND pe.id = :id_pemesanan ', params)
+        let data = db.knex.raw('SELECT DISTINCT pe.*,l.nama_kantor, v.status, p.tanggal_pembayaran FROM invoice i JOIN verifikasi v ON v.id = i.verifikasi_id JOIN pembayaran p ON p.id = v.pembayaran_id JOIN admin a ON a.id = v.admin_id JOIN pemesanan pe ON pe.id = p.pemesanan_id JOIN lokasi l ON l.id = pe.lokasi_id JOIN customer c ON c.id = pe.customer_id JOIN produk pr ON pr.id = pe.produk_id JOIN produkfinal pf ON pr.id = pf.produk_id JOIN add_on ad ON ad.id = pf.add_on_id WHERE c.id = :id AND pe.id = :idPemesanan ', params)
         return await data
     } catch (error) {
         return res.status(400).json({
@@ -16,13 +16,13 @@ const getInvoice = async(res, id, id_pemesanan) => {
     }
 }
 
-const getProdukAndAddon = async(res, id, id_pemesanan) => {
+const getProdukAndAddon = async(res, id, idPemesanan) => {
     try {
         let params = {
             id: id,
-            id_pemesanan: id_pemesanan
+            idPemesanan: idPemesanan
         }
-        let data = db.knex.raw('SELECT DISTINCT pr.produk,pr.harga as harga_produk , ad.nama,ad.harga as harga_addon FROM invoice i JOIN verifikasi v ON v.id = i.verifikasi_id JOIN pembayaran p ON p.id = v.pembayaran_id JOIN admin a ON a.id = v.admin_id JOIN pemesanan pe ON pe.id = p.pemesanan_id JOIN lokasi l ON l.id = pe.lokasi_id JOIN customer c ON c.id = pe.customer_id JOIN produk pr ON pr.id = pe.produk_id JOIN produkfinal pf ON pr.id = pf.produk_id JOIN add_on ad ON ad.id = pf.add_on_id WHERE c.id = :id AND pe.id = :id_pemesanan ', params)
+        let data = db.knex.raw('SELECT DISTINCT pr.produk,pr.harga as harga_produk , ad.nama,ad.harga as harga_addon FROM invoice i JOIN verifikasi v ON v.id = i.verifikasi_id JOIN pembayaran p ON p.id = v.pembayaran_id JOIN admin a ON a.id = v.admin_id JOIN pemesanan pe ON pe.id = p.pemesanan_id JOIN lokasi l ON l.id = pe.lokasi_id JOIN customer c ON c.id = pe.customer_id JOIN produk pr ON pr.id = pe.produk_id JOIN produkfinal pf ON pr.id = pf.produk_id JOIN add_on ad ON ad.id = pf.add_on_id WHERE c.id = :id AND pe.id = :idPemesanan ', params)
         return await data
     } catch (error) {
         return res.status(400).json({

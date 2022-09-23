@@ -62,4 +62,22 @@ function updateVerifikasi(req, res) {
     }
 }
 
-module.exports = { inputVerifikasi, getVerifikasiById, updateVerifikasi }
+function getVerifikasiByPemesanan(req, res) {
+    try {
+        let id = req.params['id']
+        let data = m_verifikasi.getVerifikasiByPemesanan(res, id)
+        u_respon.responCheck(data, res, 1)
+    } catch (error) {
+        res.status(400).json({
+            'responCode': 400,
+            'Msg': 'Controller Error :' + error.message
+        })
+    }
+}
+
+module.exports = {
+    inputVerifikasi,
+    getVerifikasiById,
+    updateVerifikasi,
+    getVerifikasiByPemesanan
+}
